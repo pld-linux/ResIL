@@ -15,12 +15,12 @@
 Summary:	Full featured image library
 Summary(pl.UTF-8):	Biblioteka obsługi obrazów z mnóstwem funkcji
 Name:		ResIL
-Version:	1.8.3
+Version:	1.8.4
 Release:	0.1
 License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/resil/%{name}-%{version}.zip
-# Source0-md5:	8863fcf78985ca532a202b66b1f9636a
+# Source0-md5:	3fe55b630edd468374c10c301ea2afeb
 Patch0:		%{name}-restrict.patch
 Patch1:		%{name}-am.patch
 URL:		http://resil.sourceforge.net/
@@ -167,39 +167,20 @@ ResIL documentation.
 Dokumentacja ResIL.
 
 %prep
-%setup -q
-
-%undos configure.ac Makefile.am lib/Makefile.am
-%{__rm} configure
-%patch0 -p1
-%patch1 -p1
-
-%{__sed} -e 's,\$(il_src),../src-IL/src,g' \
-	-e 's,\$(ilu_src),../src-ILU/src,g' \
-	-e 's,\$(ilut_src),../src-ILUT/src,g' -i lib/Makefile.am
-%{__sed} -e '/_SOURCES/s,\$(example_srcdir)/,../examples/,g' -i bin/Makefile.am
+%setup -q -c -T
+%{__unzip} -qq %{SOURCE0} -d .. -x 'ResIL-1.8.4/projects/*'
 
 %build
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-CXXFLAGS="%{rpmcxxflags} -std=c++0x"
-%configure \
-	--enable-ILU \
-	--enable-ILUT \
-	%{?debug:--disable-release} \
-	%{!?with_sse:--disable-sse} \
-	%{!?with_sse2:--disable-sse2} \
-	%{!?with_sse3:--disable-sse3} \
-	--disable-allegro --disable-opengl --disable-sdl --disable-x11 # broken
+install -d build
+cd build
+%cmake ..
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
