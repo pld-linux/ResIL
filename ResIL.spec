@@ -29,15 +29,17 @@ BuildRequires:	allegro-devel >= 4.1.16
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	jasper-devel
+# enabled only on Win32
 #BuildRequires:	jxrlib-devel
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmng-devel
 BuildRequires:	libpng-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.533
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	squish-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
