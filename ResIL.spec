@@ -19,11 +19,9 @@ Version:	1.8.4
 Release:	0.1
 License:	LGPL v2.1
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/resil/%{name}-%{version}.zip
+Source0:	https://downloads.sourceforge.net/resil/%{name}-%{version}.zip
 # Source0-md5:	3fe55b630edd468374c10c301ea2afeb
-Patch0:		%{name}-restrict.patch
-Patch1:		%{name}-am.patch
-URL:		http://resil.sourceforge.net/
+URL:		https://resil.sourceforge.net/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	SDL-devel >= 1.2.5
